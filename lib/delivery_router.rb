@@ -35,7 +35,7 @@ class DeliveryRouter
   end
 
   def route(rider:)
-    @routes[rider] || []
+    @routes[rider] ? @routes[rider].route : []
   end
 
   def delivery_time(customer:)

@@ -1,9 +1,9 @@
-require_relative "models/customer"
-require_relative "models/restaurant"
-require_relative "models/rider"
-require_relative "models/order"
-require_relative "models/route"
-require_relative "math_tools"
+require "models/customer"
+require "models/restaurant"
+require "models/rider"
+require "models/order"
+require "models/route"
+require "math_tools"
 
 class DeliveryRouter
   def initialize(restaurants, customers, riders)
@@ -20,7 +20,7 @@ class DeliveryRouter
 
     fastest_route = @riders.map do |rider|
       l1 = MathTools.get_distance_between(rider, target_restaurant)
-      Route.new(rider: rider, distance: l1, route: [target_restaurant, target_customer])
+      Route.new(rider: rider, distance: l1, checkpoints: [target_restaurant, target_customer])
     end.min_by { |r| r.distance }
 
     @orders[customer] = Order.new(customer: target_customer,
@@ -35,11 +35,10 @@ class DeliveryRouter
   end
 
   def route(rider:)
-    @routes[rider] ? @routes[rider].route : []
+    @routes[rider] ? @routes[rider].checkpoints : []
   end
 
   def delivery_time(customer:)
-    @orders[customer].delivery_time
+    @orders[customer] ? @orders[customer].delivery_time : nil
   end
-
 end

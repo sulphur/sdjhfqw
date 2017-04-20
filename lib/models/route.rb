@@ -1,8 +1,8 @@
 class Route
-  attr_reader :rider, :distance, :route
-  def initialize(rider:, distance:, route:)
+  attr_reader :rider, :distance, :checkpoints
+  def initialize(rider:, distance:, checkpoints:)
     @rider = rider
     @distance = distance
-    @route = route
+    @checkpoints = checkpoints
   end
 end

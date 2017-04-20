@@ -15,6 +15,6 @@ class Order
     rider_to_restaurant_time = MathTools.get_time_between(@rider, @restaurant, @rider.speed)
     restaurant_to_customer_time = MathTools.get_time_between(@restaurant, @customer, @rider.speed)
 
-    [rider_to_restaurant_time, restaurant.cooking_time].min + restaurant_to_customer_time
+    [rider_to_restaurant_time, restaurant.cooking_time].max + restaurant_to_customer_time
   end
 end
